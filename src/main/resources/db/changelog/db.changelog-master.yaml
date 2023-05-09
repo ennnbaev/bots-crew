@@ -1,0 +1,89 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: yenbaiev
+      changes:
+        - createTable:
+            tableName: department
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+              - column:
+                  name: head_of_department
+                  type: VARCHAR(255)
+        - createTable:
+            tableName: degree
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                      primaryKey: true
+              - column:
+                   name: name
+                   type: VARCHAR(255)
+        - createTable:
+            tableName: lector
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: degree_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: lector_degree_fk
+                    references: degree(id)
+              - column:
+                  name: salary
+                  type: INTEGER
+              - column:
+                  name: department_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: lector_department_fk
+                    references: department(id)
+        - insert:
+            tableName: degree
+            columns:
+              - column:
+                  name: id
+                  valueNumeric: 1
+              - column:
+                  name: name
+                  value: ASSISTANT
+        - insert:
+            tableName: degree
+            columns:
+             - column:
+                 name: id
+                 valueNumeric: 2
+             - column:
+                 name: name
+                 value: ASSOCIATE_PROFESSOR
+        - insert:
+            tableName: degree
+            columns:
+             - column:
+                 name: id
+                 valueNumeric: 3
+             - column:
+                name: name
+                value: PROFESSOR
+
